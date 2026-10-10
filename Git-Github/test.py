@@ -1,0 +1,5 @@
+print("Github:- GitHub is a web-based cloud platform that hosts Git repositories for version control and collaborative software development")
+print()
+print("Git:- Git is a free, open-source distributed version control system (VCS) used to track changes in computer files and coordinate work on those files among multiple people")
+print()
+print("MLOPS:- MLOps (Machine Learning Operations) is a set of practices that combines machine learning, software engineering, and DevOps to automate, standardize, and manage the entire lifecycle of machine learning models in production")
