@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5f9;
+            margin: 0;
+            padding: 40px 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: auto;
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px #00000012;
+        }
+
+        h1 {
+            font-size: 25px;
+            text-align: center;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 16px;
+            font-weight: bold;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 11px;
+            margin-top: 7px;
+            border: 1px solid #ccd2dc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 24px;
+            border: 0;
+            border-radius: 7px;
+            background: #2457d6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result, .error {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .result {
+            background: #e8f6ed;
+        }
+
+        .error {
+            background: #fdeaea;
+            color: #9c2020;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student Performance Predictor</h1>
+        <p>Enter the student's details to estimate their final score.</p>
+
+        <form method="POST">
+            <label for="study_hours">Daily Study Hours (0–24)</label>
+            <input id="study_hours" name="study_hours"
+                   type="number" min="0" max="24"
+                   step="0.1" required>
+
+            <label for="attendance">Attendance (%)</label>
+            <input id="attendance" name="attendance"
+                   type="number" min="0" max="100"
+                   step="0.1" required>
+
+            <label for="previous_score">Previous Score (0–100)</label>
+            <input id="previous_score" name="previous_score"
+                   type="number" min="0" max="100"
+                   step="0.1" required>
+
+            <label for="assignments_completed">
+                Assignments Completed (0–10)
+            </label>
+            <input id="assignments_completed"
+                   name="assignments_completed"
+                   type="number" min="0" max="10"
+                   step="1" required>
+
+            <button type="submit">Predict Score</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            <strong>Predicted Final Score: {{ prediction }} / 100</strong>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

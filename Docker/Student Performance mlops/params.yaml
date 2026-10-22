@@ -1,0 +1,11 @@
+data:
+  test_size: 0.2
+  random_state: 42
+
+model:
+  n_estimators: 150
+  max_depth: 8
+  random_state: 42
+
+evaluation:
+  minimum_r2: 0.50

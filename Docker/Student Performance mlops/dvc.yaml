@@ -1,0 +1,43 @@
+stages:
+  ingest:
+    cmd: python src/data_ingestion.py
+    deps:
+      - src/data_ingestion.py
+    outs:
+      - data/raw/students.csv
+
+  transform:
+    cmd: python src/data_transformation.py
+    deps:
+      - src/data_transformation.py
+      - data/raw/students.csv
+    params:
+      - data.test_size
+      - data.random_state
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  train:
+    cmd: python src/model_trainer.py
+    deps:
+      - src/model_trainer.py
+      - data/processed/train.csv
+    params:
+      - model.n_estimators
+      - model.max_depth
+      - model.random_state
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/model_evaluation.py
+    deps:
+      - src/model_evaluation.py
+      - data/processed/test.csv
+      - models/model.pkl
+    params:
+      - evaluation.minimum_r2
+    metrics:
+      - reports/metrics.json:
+          cache: false
